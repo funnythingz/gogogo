@@ -1,6 +1,6 @@
 = content main
   h1
-    | log.link
+    | Index
   section
     a href="/new"
       | create Entry

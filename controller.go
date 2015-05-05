@@ -117,13 +117,13 @@ func createEntry(c web.C, w http.ResponseWriter, r *http.Request) {
 	content := r.FormValue("entry[content]")
 	themeId, _ := strconv.Atoi(r.FormValue("entry[theme_id]"))
 
-	Entry := model.Entry{
+	entry := model.Entry{
 		Title:   title,
 		Content: content,
 		ThemeId: themeId,
 	}
 
-	if _, err := govalidator.ValidateStruct(Entry); err != nil {
+	if _, err := govalidator.ValidateStruct(entry); err != nil {
 		log.Println(err.Error())
 	}
 
@@ -144,14 +144,14 @@ func createEntry(c web.C, w http.ResponseWriter, r *http.Request) {
 	}
 	if len(Error) > 0 {
 		tpl, _ := ace.Load("views/layouts/layout", "views/new", &ace.Options{DynamicReload: true})
-		tpl.Execute(w, FormResultData{Entry, Error})
+		tpl.Execute(w, FormResultData{entry, Error})
 		return
 	}
 
-	db.Dbmap.NewRecord(Entry)
-	db.Dbmap.Create(&Entry)
+	db.Dbmap.NewRecord(entry)
+	db.Dbmap.Create(&entry)
 
-	url := fmt.Sprintf("/%d", Entry.Id)
+	url := fmt.Sprintf("/%d", entry.Id)
 	http.Redirect(w, r, url, http.StatusMovedPermanently)
 }
 

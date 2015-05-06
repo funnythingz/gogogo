@@ -6,44 +6,24 @@ This is web application in the Golang project template.
 
 - Go Manager - bundle for go ... https://github.com/mattn/gom
 - Web framework ... https://github.com/zenazn/goji
+- Params binding ... https://github.com/goji/param
 - Asset Management ... https://github.com/shaoshing/train
 - ORMapper ... https://github.com/jinzhu/gorm
 - Markdown to HTML ... https://github.com/russross/blackfriday
 - Sanitizer ... https://github.com/microcosm-cc/bluemonday
-- live reload ... https://github.com/codegangsta/gin
-- template ... https://github.com/yosssi/ace
-- AWS ... https://github.com/mitchellh/goamz
-- validater ... https://github.com/asaskevich/govalidator
+- Truncate ... https://github.com/funnythingz/sunnyday
+- Live reload ... https://github.com/codegangsta/gin
+- Template ... https://github.com/yosssi/ace
+- Validater ... https://github.com/asaskevich/govalidator
+- PrintDebug ... https://github.com/k0kubun/pp
+- Redis ... https://github.com/garyburd/redigo/redis
+- TOML ... https://github.com/BurntSushi/toml
 
 and more...
 
 ## tree
 
-```
-.
-├── app.go
-├── controller.go
-├── database.yml
-├── dbmap.go
-├── assets
-│   ├── javascripts
-│   │   └── main.js
-│   └── stylesheets
-│       └── main.scss
-├── helper
-│   └── helper.go
-├── migrate
-│   └── migration.go
-├── models
-│   ├── entry.go
-│   └── foo.go
-├── entry_test.go
-└── views
-    ├── layouts
-    │   └── layout.ace
-    ├── index.ace
-    └── show.ace
-```
+TODO:
 
 ## Getting started
 
@@ -57,7 +37,7 @@ and more...
 Must database setting in MySQL before try `GoGoGo`
 
 ```
-% cp database.yml.sample database.yml
+% cp database.toml.sample database.toml
 ```
 
 create database and user/password.

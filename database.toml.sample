@@ -1,0 +1,16 @@
+[Connection]
+adapter  = "mysql"
+encoding = "utf8"
+host = "localhost"
+username = "username"
+password = "password"
+
+[Databases]
+  [Databases.development]
+  database = "gogogo_development"
+
+  [Databases.test]
+  database = "gogogo_test"
+
+  [Databases.production]
+  database = "gogogo"

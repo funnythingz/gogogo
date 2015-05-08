@@ -28,4 +28,5 @@ _testmain.go
 tmp
 gin-bin
 database.yml
+database.toml
 _vendor

@@ -1,25 +1,25 @@
 package db
 
 import (
-	"../helper"
+	"github.com/BurntSushi/toml"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
-	"gopkg.in/yaml.v2"
-	"io/ioutil"
-	_ "log"
-	_ "reflect"
+	_ "github.com/k0kubun/pp"
+	"log"
 )
 
 var Dbmap gorm.DB
 
 func DbOpen(
 	adapter string,
+	host string,
 	username string,
 	password string,
 	database string,
-	encoding string) {
-
-	Dbmap, _ = gorm.Open(adapter, username+":"+password+"@/"+database+"?charset="+encoding+"&parseTime=True")
+	encoding string,
+) {
+	dataSourceName := username + ":" + password + "@tcp(" + host + ":3306)/" + database + "?charset=" + encoding + "&parseTime=True"
+	Dbmap, _ = gorm.Open(adapter, dataSourceName)
 
 	Dbmap.DB()
 
@@ -30,32 +30,76 @@ func DbOpen(
 	Dbmap.SingularTable(true)
 }
 
-func DbConfig() map[interface{}]interface{} {
-	m := make(map[interface{}]interface{})
-	config, _ := ioutil.ReadFile("database.yml")
-	err := yaml.Unmarshal([]byte(config), &m)
-	helper.Check(err)
-	return m
+type env struct {
+	Host     string
+	Username string
+	Password string
+	Database string
 }
 
-func DbDevelopmentConnect() {
-	config := DbConfig()["development"].(map[interface{}]interface{})
-	DbOpen(
-		config["adapter"].(string),
-		config["username"].(string),
-		config["password"].(string),
-		config["database"].(string),
-		config["encoding"].(string),
+type connection struct {
+	Adapter  string
+	Encoding string
+	Host     string
+	Username string
+	Password string
+	Database string
+}
+
+type Config struct {
+	Connection connection
+	Databases  map[string]env
+}
+
+func DbConfig() Config {
+	var config Config
+	if _, err := toml.DecodeFile("db/database.toml", &config); err != nil {
+		log.Println(err)
+	}
+	return config
+}
+
+func DbConnect(env string) {
+	config := DbConfig()
+
+	var (
+		dbEnv = config.Databases[env]
+
+		host = func() string {
+			if dbEnv.Host != "" {
+				return dbEnv.Host
+			}
+			return config.Connection.Host
+		}()
+
+		username = func() string {
+			if dbEnv.Username != "" {
+				return dbEnv.Username
+			}
+			return config.Connection.Username
+		}()
+
+		password = func() string {
+			if dbEnv.Password != "" {
+				return dbEnv.Password
+			}
+			return config.Connection.Password
+		}()
+
+		database = func() string {
+			if dbEnv.Database != "" {
+				return dbEnv.Database
+			}
+			return config.Connection.Database
+		}()
 	)
-}
 
-func DbTestConnect() {
-	config := DbConfig()["test"].(map[interface{}]interface{})
 	DbOpen(
-		config["adapter"].(string),
-		config["username"].(string),
-		config["password"].(string),
-		config["database"].(string),
-		config["encoding"].(string),
+		config.Connection.Adapter,
+		host,
+		username,
+		password,
+		database,
+		config.Connection.Encoding,
 	)
 }

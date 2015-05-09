@@ -2,7 +2,7 @@ package main
 
 import (
 	"./db"
-	"github.com/shaoshing/train"
+	"./handler"
 	"github.com/zenazn/goji/bind"
 	"github.com/zenazn/goji/graceful"
 	"github.com/zenazn/goji/web"
@@ -10,22 +10,27 @@ import (
 	"regexp"
 )
 
+var (
+	sHandler         = &handler.SimpleHandler{}
+	exceptionHandler = &handler.ExceptionHandler{}
+)
+
 func main() {
-	db.DbDevelopmentConnect()
-	train.ConfigureHttpHandler(nil)
+	// Database
+	db.Connect()
 
 	// Mux
 	m := web.New()
 
 	// Routes
-	m.Get("/", top)
-	m.Get(regexp.MustCompile(`^/(?P<id>\d+)$`), entry)
-	m.Get("/new", newEntry)
+	m.Get("/", sHandler.Top)
+	m.Get(regexp.MustCompile(`^/(?P<id>\d+)$`), sHandler.Entry)
+	m.Get("/new", sHandler.New)
 	m.Get("/entry", http.RedirectHandler("/", 301))
-	m.Post("/entry", createEntry)
+	m.Post("/entry", sHandler.Create)
 
 	// Exception
-	m.NotFound(NotFound)
+	m.NotFound(exceptionHandler.NotFound)
 
 	// Serve
 	graceful.Serve(bind.Default(), m)

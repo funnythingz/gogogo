@@ -1,9 +1,0 @@
-= content main
-  article
-    h1
-      | {{.Title}}
-    | {{HTML .HtmlContent}}
-
-  .to_top
-    a href="/"
-      | to Top

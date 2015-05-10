@@ -8,18 +8,18 @@ import (
 
 type SimpleHandler struct{}
 
-func (s *SimpleHandler) Top(c web.C, w http.ResponseWriter, r *http.Request) {
+func (h *SimpleHandler) Top(c web.C, w http.ResponseWriter, r *http.Request) {
 	//TODO
 }
 
-func (s *SimpleHandler) Entry(c web.C, w http.ResponseWriter, r *http.Request) {
+func (h *SimpleHandler) Entry(c web.C, w http.ResponseWriter, r *http.Request) {
 	//TODO
 }
 
-func (s *SimpleHandler) New(c web.C, w http.ResponseWriter, r *http.Request) {
+func (h *SimpleHandler) New(c web.C, w http.ResponseWriter, r *http.Request) {
 	//TODO
 }
 
-func (s *SimpleHandler) Create(c web.C, w http.ResponseWriter, r *http.Request) {
+func (h *SimpleHandler) Create(c web.C, w http.ResponseWriter, r *http.Request) {
 	//TODO
 }

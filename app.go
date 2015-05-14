@@ -3,6 +3,7 @@ package main
 import (
 	"./db"
 	"./handler"
+	_ "github.com/zenazn/goji"
 	"github.com/zenazn/goji/bind"
 	"github.com/zenazn/goji/graceful"
 	"github.com/zenazn/goji/web"

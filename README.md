@@ -2,7 +2,7 @@
 
 This is web application in the Golang project template.
 
-## Getting started
+## Usage
 
 ```
 % git clone git@github.com:funnythingz/gogogo.git

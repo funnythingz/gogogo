@@ -2,25 +2,25 @@ package main
 
 import (
 	"../db"
-	"../models"
+	"../domain"
 	"log"
 )
 
 func main() {
-	db.DbDevelopmentConnect()
+	db.Connect()
 	reset()
 	create()
 	migrate()
 }
 
 func reset() {
-	log.Println(db.Dbmap.DropTableIfExists(&model.Entry{}))
+	log.Println(db.Dbmap.DropTableIfExists(&domain.Entry{}))
 }
 
 func create() {
-	log.Println(db.Dbmap.CreateTable(&model.Entry{}))
+	log.Println(db.Dbmap.CreateTable(&domain.Entry{}))
 }
 
 func migrate() {
-	log.Println(db.Dbmap.AutoMigrate(&model.Entry{}))
+	log.Println(db.Dbmap.AutoMigrate(&domain.Entry{}))
 }

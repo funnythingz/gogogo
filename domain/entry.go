@@ -1,19 +1,18 @@
-package model
+package domain
 
 import (
 	"../db"
+	"../ddd"
 	_ "github.com/k0kubun/pp"
 	_ "log"
 	"time"
 )
 
 type Entry struct {
-	Id        int
-	Title     string
-	Content   string
-	ThemeId   int
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	ddd.Entity
+	Title   string
+	Content string
+	ThemeId int
 }
 
 func FindEntry(id string) Entry {

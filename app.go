@@ -12,8 +12,8 @@ import (
 )
 
 var (
-	sHandler         = &handler.SimpleHandler{}
-	exceptionHandler = &handler.ExceptionHandler{}
+	sHandler = &handler.SimpleHandler{}
+	eHandler = &handler.ExceptionHandler{}
 )
 
 func main() {
@@ -31,7 +31,7 @@ func main() {
 	m.Post("/entry", sHandler.Create)
 
 	// Exception
-	m.NotFound(exceptionHandler.NotFound)
+	m.NotFound(eHandler.NotFound)
 
 	// Serve
 	graceful.Serve(bind.Default(), m)

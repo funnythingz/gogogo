@@ -1,6 +1,6 @@
 # GoGoGo
 
-This is web application in the Golang project template.
+This is web application in the Golang project template of DDD base.
 
 ## Usage
 

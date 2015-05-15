@@ -61,7 +61,7 @@ access to `http://localhost:3000`
 │   ├── db-init.go
 │   └── dbmap.go
 ├── ddd
-│   └── entiry.go
+│   └── entity.go
 ├── domain
 │   ├── entry
 │   │   └── repository.go

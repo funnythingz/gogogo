@@ -14,9 +14,3 @@ type Entry struct {
 	Content string
 	ThemeId int
 }
-
-func FindEntry(id string) Entry {
-	var entry Entry
-	db.Dbmap.Find(&entry, id).First(&entry)
-	return entry
-}

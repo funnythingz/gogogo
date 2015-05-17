@@ -26,7 +26,6 @@ func main() {
 	// Routes
 	m.Get("/", sHandler.Top)
 	m.Get(regexp.MustCompile(`^/(?P<id>\d+)$`), sHandler.Entry)
-	m.Get("/new", sHandler.New)
 	m.Get("/entry", http.RedirectHandler("/", 301))
 	m.Post("/entry", sHandler.Create)
 

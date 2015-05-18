@@ -50,29 +50,6 @@ access to `http://localhost:3000`
 % gom test -v
 ```
 
-## tree
-
-```
-.
-├── Gomfile
-├── app.go
-├── db
-│   ├── database.toml
-│   ├── db-init.go
-│   └── dbmap.go
-├── ddd
-│   └── entity.go
-├── domain
-│   ├── entry
-│   │   └── repository.go
-│   └── entry.go
-├── handler
-│   ├── exception-handler.go
-│   └── simple-handler.go
-└── migrate
-    └── migration.go
-```
-
 ## use package
 
 - Go Manager - bundle for go ... https://github.com/mattn/gom

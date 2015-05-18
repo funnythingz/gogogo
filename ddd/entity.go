@@ -5,7 +5,7 @@ import (
 )
 
 type Entity struct {
-	Id        int       `json:"id"`
+	Identity
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }

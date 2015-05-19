@@ -1,8 +1,8 @@
 package main
 
 import (
-	"./db"
 	"./handler"
+	"./infra/db"
 	_ "github.com/zenazn/goji"
 	"github.com/zenazn/goji/bind"
 	"github.com/zenazn/goji/graceful"

@@ -3,31 +3,44 @@ package entry
 import (
 	"../../db"
 	"../../domain"
+	"../../mapper"
 	_ "github.com/k0kubun/pp"
 )
 
 type Repository struct{}
 
-func (r *Repository) Commit(entry domain.Entry) domain.Entry {
-	db.Dbmap.NewRecord(entry)
-	db.Dbmap.Create(&entry)
-	return entry
+func (r *Repository) Commit(entry domain.Entry) {
+	em := mapper.EntryMapper{}
+	em.New(entry)
+	em.Commit()
+	r.Fetch(em.Id)
 }
 
 func (r *Repository) Fetch(id int) domain.Entry {
-	entry := domain.Entry{}
-	db.Dbmap.Find(&entry, id).First(&entry)
-	return entry
+	em := mapper.EntryMapper{}
+	em.Fetch(id)
+	return domain.Entry{
+		ddd.Entity{
+			Id: em.Id,
+		},
+		Title:   em.Title,
+		Content: em.Content,
+		domain.Theme{
+			ddd.Entity{
+				Id: em.ThemeId,
+			},
+		},
+	}
 }
 
 var (
 	repo = &Repository{}
 )
 
-func Commit(iro domain.Iro) domain.Iro {
-	return repo.Commit(iro)
+func Commit(entry domain.Entry) {
+	repo.Commit(entry)
 }
 
-func Fetch(id int) domain.Iro {
+func Fetch(id int) domain.Entry {
 	return repo.Fetch(id)
 }

@@ -1,10 +1,10 @@
-package table
+package ddd
 
 import (
 	"time"
 )
 
-type Entity struct {
+type EntityMapper struct {
 	Id        int
 	CreatedAt time.Time
 	UpdatedAt time.Time

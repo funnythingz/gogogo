@@ -12,11 +12,14 @@ func Connect() {
 		env = os.Args[1]
 	}
 
-	if env == "production" {
+	switch {
+	case env == "production":
 		DbConnect("production")
-	} else {
+		return
+	case env == "development":
 		DbConnect("development")
 		Dbmap.LogMode(true)
+		return
 	}
 
 	log.Println(fmt.Sprintf("mode: %s", env))

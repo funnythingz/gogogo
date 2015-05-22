@@ -1,5 +1,5 @@
 package ddd
 
 type Entity struct {
-	Identity
+	Id int `json:"id"`
 }

@@ -10,21 +10,21 @@ import (
 type EntryRepository struct{}
 
 func (r *EntryRepository) Commit(entry domain.Entry) domain.Entry {
-	em := mapper.Entry{}
-	em.Map(entry)
-	em.Commit()
-	return r.Fetch(em.Id)
+	me := mapper.Entry{}
+	me.Map(entry)
+	me.Commit()
+	return r.Fetch(me.Id)
 }
 
 func (r *EntryRepository) Fetch(id int) domain.Entry {
-	em := mapper.Entry{}
-	em.Fetch(id)
+	me := mapper.Entry{}
+	me.Fetch(id)
 	return domain.Entry{
 		Entity: ddd.Entity{
-			Id: em.Id,
+			Id: me.Id,
 		},
-		Title:   em.Title,
-		Content: em.Content,
+		Title:   me.Title,
+		Content: me.Content,
 	}
 }
 

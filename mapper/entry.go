@@ -1,20 +1,20 @@
 package mapper
 
 import (
+	"../db"
 	"../ddd"
+	"../domain"
 )
 
-type EntryMapper struct {
+type Entry struct {
 	ddd.EntityMapper
 	Title   string
 	Content string
-	ThemeId int
 }
 
-func (m *Entry) New(entry domain.Entry) {
+func (m *Entry) Map(entry domain.Entry) {
 	m.Title = entry.Title
 	m.Content = entry.Content
-	m.ThemeId = entry.Theme.Id
 }
 
 func (m *Entry) Commit() {

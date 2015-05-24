@@ -1,46 +1,33 @@
 package entry
 
 import (
-	"../../db"
+	"../../ddd"
 	"../../domain"
 	"../../mapper"
 	_ "github.com/k0kubun/pp"
 )
 
-type Repository struct{}
+type EntryRepository struct{}
 
-func (r *Repository) Commit(entry domain.Entry) {
-	em := mapper.EntryMapper{}
-	em.New(entry)
-	em.Commit()
-	r.Fetch(em.Id)
+func (r *EntryRepository) Commit(entry domain.Entry) domain.Entry {
+	me := mapper.Entry{}
+	me.Map(entry)
+	me.Commit()
+	return r.Fetch(me.Id)
 }
 
-func (r *Repository) Fetch(id int) domain.Entry {
-	em := mapper.EntryMapper{}
-	em.Fetch(id)
+func (r *EntryRepository) Fetch(id int) domain.Entry {
+	me := mapper.Entry{}
+	me.Fetch(id)
 	return domain.Entry{
-		ddd.Entity{
-			Id: em.Id,
+		Entity: ddd.Entity{
+			Id: me.Id,
 		},
-		Title:   em.Title,
-		Content: em.Content,
-		domain.Theme{
-			ddd.Entity{
-				Id: em.ThemeId,
-			},
-		},
+		Title:   me.Title,
+		Content: me.Content,
 	}
 }
 
 var (
-	repo = &Repository{}
+	Repository = &EntryRepository{}
 )
-
-func Commit(entry domain.Entry) {
-	repo.Commit(entry)
-}
-
-func Fetch(id int) domain.Entry {
-	return repo.Fetch(id)
-}

@@ -40,8 +40,16 @@ access to `http://localhost:3000`
 
 ### migration
 
+auto migrate
+
 ```
 % gom run migrate/migration.go
+```
+
+reset
+
+```
+% gom run migrate/migration.go reset
 ```
 
 ### test

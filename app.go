@@ -1,8 +1,8 @@
 package main
 
 import (
+	"./db"
 	"./handler"
-	"./infra/db"
 	_ "github.com/zenazn/goji"
 	"github.com/zenazn/goji/bind"
 	"github.com/zenazn/goji/graceful"
@@ -25,8 +25,8 @@ func main() {
 
 	// Routes
 	m.Get("/", sHandler.Top)
-	m.Get(regexp.MustCompile(`^/(?P<id>\d+)$`), sHandler.Entry)
-	m.Get("/entry", http.RedirectHandler("/", 301))
+	m.Get(regexp.MustCompile(`^/entry/(?P<id>\d+)$`), sHandler.Entry)
+	m.Get("/entry", http.RedirectHandler("/", 404))
 	m.Post("/entry", sHandler.Create)
 
 	// Exception

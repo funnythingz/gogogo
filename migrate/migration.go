@@ -1,26 +1,43 @@
 package main
 
 import (
-	"../infra/db"
-	"../infra/table"
+	"../db"
+	"../mapper"
+	"fmt"
 	"log"
+	"os"
 )
 
 func main() {
 	db.Connect()
-	reset()
-	create()
-	migrate()
+
+	action := "migrate"
+	if len(os.Args) >= 2 {
+		action = os.Args[1]
+	}
+
+	log.Println(fmt.Sprintf("mode: %s", action))
+
+	switch {
+	case action == "reset":
+		Reset()
+		return
+	default:
+		Migrate()
+		return
+	}
+
 }
 
-func reset() {
-	log.Println(db.Dbmap.DropTableIfExists(&table.Entry{}))
+func Reset() {
+	log.Println(db.Dbmap.DropTableIfExists(&mapper.Entry{}))
+	Create()
 }
 
-func create() {
-	log.Println(db.Dbmap.CreateTable(&table.Entry{}))
+func Create() {
+	log.Println(db.Dbmap.CreateTable(&mapper.Entry{}))
 }
 
-func migrate() {
-	log.Println(db.Dbmap.AutoMigrate(&table.Entry{}))
+func Migrate() {
+	log.Println(db.Dbmap.AutoMigrate(&mapper.Entry{}))
 }

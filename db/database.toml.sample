@@ -7,10 +7,10 @@ password = "password"
 
 [Databases]
   [Databases.development]
-  database = "gogogo_development"
+  database = "database_name_dev"
 
   [Databases.test]
-  database = "gogogo_test"
+  database = "database_name_test"
 
   [Databases.production]
-  database = "gogogo"
+  database = "database_name"

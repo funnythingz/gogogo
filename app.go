@@ -12,8 +12,8 @@ import (
 )
 
 var (
-	sHandler = &handler.SimpleHandler{}
-	eHandler = &handler.ExceptionHandler{}
+	sHandler = handler.SimpleHandler{}
+	eHandler = handler.ExceptionHandler{}
 )
 
 func main() {

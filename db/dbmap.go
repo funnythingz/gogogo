@@ -1,6 +1,7 @@
 package db
 
 import (
+	"fmt"
 	"github.com/BurntSushi/toml"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
@@ -18,7 +19,7 @@ func DbOpen(
 	database string,
 	encoding string,
 ) {
-	dataSourceName := username + ":" + password + "@tcp(" + host + ":3306)/" + database + "?charset=" + encoding + "&parseTime=True"
+	dataSourceName := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=%s&parseTime=True&collation=utf8mb4_unicode_ci", username, password, host, database, encoding)
 	Dbmap, _ = gorm.Open(adapter, dataSourceName)
 
 	Dbmap.DB()
@@ -31,19 +32,17 @@ func DbOpen(
 }
 
 type env struct {
-	Host     string
-	Username string
-	Password string
-	Database string
+	Host     string `toml:"host"`
+	Username string `toml:"username"`
+	Password string `toml:"password"`
+	Database string `toml:"database"`
 }
 
 type connection struct {
-	Adapter  string
-	Encoding string
-	Host     string
-	Username string
-	Password string
-	Database string
+	Adapter  string `toml:"adapter"`
+	Encoding string `toml:"encoding"`
+	Host     string `toml:"host"`
+	Database string `toml:"database"`
 }
 
 type Config struct {
@@ -73,17 +72,11 @@ func DbConnect(env string) {
 		}()
 
 		username = func() string {
-			if dbEnv.Username != "" {
-				return dbEnv.Username
-			}
-			return config.Connection.Username
+			return dbEnv.Username
 		}()
 
 		password = func() string {
-			if dbEnv.Password != "" {
-				return dbEnv.Password
-			}
-			return config.Connection.Password
+			return dbEnv.Password
 		}()
 
 		database = func() string {

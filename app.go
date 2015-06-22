@@ -34,9 +34,9 @@ func main() {
 
 	// Routes
 	m.Get("/", sHandler.Top)
-	m.Get(regexp.MustCompile(`^/entry/(?P<id>\d+)$`), sHandler.Entry)
-	m.Get("/entry", http.RedirectHandler("/", 404))
-	m.Post("/entry", sHandler.Create)
+	m.Get(regexp.MustCompile(`^/entries/(?P<id>\d+)$`), sHandler.Entry)
+	m.Get("/entries", http.RedirectHandler("/", 404))
+	m.Post("/entries", sHandler.Create)
 
 	// Exception
 	m.NotFound(eHandler.NotFound)

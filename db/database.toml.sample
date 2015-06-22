@@ -1,16 +1,20 @@
 [Connection]
 adapter  = "mysql"
-encoding = "utf8"
+encoding = "utf8mb4"
 host = "localhost"
-username = "username"
-password = "password"
 
 [Databases]
   [Databases.development]
   database = "database_name_dev"
+  username = "username"
+  password = "password"
 
   [Databases.test]
   database = "database_name_test"
+  username = "username"
+  password = "password"
 
   [Databases.production]
   database = "database_name"
+  username = "username"
+  password = "password"

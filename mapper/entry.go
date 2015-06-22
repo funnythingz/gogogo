@@ -1,9 +1,9 @@
 package mapper
 
 import (
-	"../db"
-	"../ddd"
-	"../domain"
+	"github.com/funnythingz/gogogo/db"
+	"github.com/funnythingz/gogogo/ddd"
+	"github.com/funnythingz/gogogo/domain"
 )
 
 type Entry struct {

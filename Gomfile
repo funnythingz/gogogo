@@ -12,6 +12,8 @@ gom 'github.com/k0kubun/pp'
 gom 'github.com/garyburd/redigo/redis'
 gom 'github.com/BurntSushi/toml'
 gom 'github.com/shaoshing/train'
+gom 'github.com/goji/glogrus'
+gom 'github.com/Sirupsen/logrus'
 
 group :development do
     gom 'github.com/codegangsta/gin'

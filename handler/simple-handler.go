@@ -1,10 +1,10 @@
 package handler
 
 import (
-	"../domain"
-	"../domain/entry"
-	"../helper"
 	"encoding/json"
+	"github.com/funnythingz/gogogo/domain"
+	"github.com/funnythingz/gogogo/domain/entry"
+	"github.com/funnythingz/gogogo/helper"
 	_ "github.com/k0kubun/pp"
 	"github.com/zenazn/goji/web"
 	"io"

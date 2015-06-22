@@ -1,12 +1,15 @@
 package main
 
 import (
-	"./db"
-	"./handler"
+	"github.com/Sirupsen/logrus"
+	"github.com/funnythingz/gogogo/db"
+	"github.com/funnythingz/gogogo/handler"
+	"github.com/goji/glogrus"
 	_ "github.com/zenazn/goji"
 	"github.com/zenazn/goji/bind"
 	"github.com/zenazn/goji/graceful"
 	"github.com/zenazn/goji/web"
+	"github.com/zenazn/goji/web/middleware"
 	"net/http"
 	"regexp"
 )
@@ -22,6 +25,12 @@ func main() {
 
 	// Mux
 	m := web.New()
+
+	// Logger
+	m.Abandon(middleware.Logger)
+	logr := logrus.New()
+	logr.Formatter = new(logrus.JSONFormatter)
+	m.Use(glogrus.NewGlogrus(logr, "gogogo"))
 
 	// Routes
 	m.Get("/", sHandler.Top)

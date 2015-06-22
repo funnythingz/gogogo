@@ -1,7 +1,7 @@
 package domain
 
 import (
-	"../ddd"
+	"github.com/funnythingz/gogogo/ddd"
 )
 
 type Entry struct {

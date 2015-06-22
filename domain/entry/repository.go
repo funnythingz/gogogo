@@ -1,9 +1,9 @@
 package entry
 
 import (
-	"../../ddd"
-	"../../domain"
-	"../../mapper"
+	"github.com/funnythingz/gogogo/ddd"
+	"github.com/funnythingz/gogogo/domain"
+	"github.com/funnythingz/gogogo/mapper"
 	_ "github.com/k0kubun/pp"
 )
 
